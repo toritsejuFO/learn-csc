@@ -1,11 +1,9 @@
 const colors = {
-  brown: '#F2E5D7',
-  darkBrown: '#040302',
-  gray: '#ccc',
-  black: '#111',
-  themeColor: '#040302',
-  // themeColor: 'purple',
-  // themeColor: 'AD82F8',
+  gray: '#E1D9D7',
+  themeColorDark: '#1B224C', // dark purple
+  themeColor: '#1B224C', // dark purple
+  themeColorLight: '#84578E', // light purple
+  // themeColor: '#84578E', // light purple
 }
 
 export default colors;
