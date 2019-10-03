@@ -27,8 +27,8 @@ export default class MyHeader extends Component {
       <>
         <StatusBar barStyle='light-content'/>
         <Header
-          style={{ backgroundColor: colors.themeColor }}
-          androidStatusBarColor={colors.themeColor}
+          style={{ backgroundColor: colors.themeColorDark }}
+          androidStatusBarColor={colors.themeColorDark}
         >
           <Left>
             <Button transparent onPress={() => this.props.navigation.openDrawer()}>
@@ -40,7 +40,7 @@ export default class MyHeader extends Component {
           </Body>
           {
             username && username != '' ? 
-            <Right><Text style={{ color: colors.gray, fontSize: 20 }}>{username}</Text></Right>
+            <Right><Text style={{ color: colors.gray, fontSize: 18, fontWeight: 'bold' }}>{username}</Text></Right>
             : <Right/>
           }
         </Header>
