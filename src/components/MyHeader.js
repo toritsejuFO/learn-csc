@@ -21,7 +21,7 @@ export default class MyHeader extends Component {
   }
   
   render() {
-    const { iconName, title, username } = this.props;
+    const { iconName, title, username, goBack } = this.props;
 
     return (
       <>
@@ -31,7 +31,10 @@ export default class MyHeader extends Component {
           androidStatusBarColor={colors.themeColorDark}
         >
           <Left>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent onPress={() => {
+              if (goBack) this.props.navigation.goBack();
+              else this.props.navigation.openDrawer();
+            }}>
               <Icon name={iconName} style={{color: colors.gray}} />
             </Button>
           </Left>
