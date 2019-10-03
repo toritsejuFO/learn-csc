@@ -14,9 +14,9 @@ import {
   Text,
 } from 'native-base';
 
-const drawerCover = require('../../assets/learn.jpg')
-
 import colors from '../colors';
+
+const drawerCover = require('../../assets/images/pq_text_light.jpeg')
 
 const items = [
   {
@@ -27,7 +27,7 @@ const items = [
   },
   {
     name: 'Quiz',
-    screen: 'Quiz',
+    screen: 'QuizList',
     icon: 'book',
     type: 'FontAwesome',
   },
@@ -48,7 +48,7 @@ const items = [
 export default class SideBar extends Component {
   render () {
     return (
-      <Container style={{flex: 1, backgroundColor: colors.gray}}>
+      <Container style={{flex: 1, backgroundColor: colors.themeColorDark}}>
         <Image source={drawerCover} style={styles.drawerCover}/>
         <List
           dataArray={items}
@@ -64,7 +64,7 @@ export default class SideBar extends Component {
                   active
                   name={item.icon}
                   type={item.type && item.type}
-                  style={{fontSize: 28, width: 30, color: '#555'}}
+                  style={{fontSize: 28, width: 30, color: colors.gray}}
                 />
                 <Text style={styles.text}>{item.name}</Text>
               </Left>
@@ -72,7 +72,7 @@ export default class SideBar extends Component {
                 <Right>
                   <Icon
                     name={item.right}
-                    style={{color: '#f22', fontSize: 26}}
+                    style={{color: 'darkred', fontSize: 26}}
                   />
                 </Right>
               }
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '400',
     fontSize: 18,
-    color: '#333',
+    color: colors.gray,
     marginLeft: 20,
   },
   drawerCover: {

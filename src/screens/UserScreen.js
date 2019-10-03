@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {
   ImageBackground,
-  StyleSheet,
-  Dimensions,
   View,
 } from 'react-native';
 import {
@@ -19,7 +17,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import MyHeader from '../components/MyHeader';
 import colors from '../colors';
-const homeBackgroundImage = require('../../assets/home.jpg');
+import importedStyles from '../styles';
+
+const homeBackgroundImage = require('../../assets/images/pq_dark.jpeg');
 
 export default class UserScreen extends Component {
   state = {
@@ -27,8 +27,19 @@ export default class UserScreen extends Component {
   }
 
   componentDidMount = async () => {
-    const username = await AsyncStorage.getItem('username') || '';
+    let username = await AsyncStorage.getItem('@learncsc:username') || '';
     this.setState({username});
+
+    // Attempt to restore previous username if user left editing halfway, without saving
+    this.focusListener = this.props.navigation.addListener('didFocus', async () => {
+      try {
+        let username = await AsyncStorage.getItem('@learncsc:username') || '';
+        this.setState({username});
+      }
+      catch {
+        this.setState({username: ''})
+      }
+    })
   }
 
   handleUsernameChange = () => {
@@ -37,9 +48,6 @@ export default class UserScreen extends Component {
 
   render() {
     let { username } = this.state;
-    if (username == '') {
-      username = this.props.navigation.getParam('username', '');
-    }
 
     return (
       <Container>
@@ -48,10 +56,10 @@ export default class UserScreen extends Component {
         <Content style={{ display: 'flex' }}>
           <ImageBackground
             source={homeBackgroundImage}
-            style={styles.backgroundImage}
+            style={importedStyles.backgroundImage}
             resizeMode='cover'
           >
-          <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: 20, justifyContent: 'space-evenly' }}>
+          <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 20, justifyContent: 'space-evenly' }}>
             <Form>
               <Item fixedLabel style={{marginBottom: 30}} last>
                 <Label style={{ color:colors.gray, fontSize: 20 }}>Username</Label>
@@ -77,14 +85,3 @@ export default class UserScreen extends Component {
     );
   }
 }
-
-deviceWidth = Dimensions.get('window').width
-deviceHeight = Dimensions.get('window').height
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    width: deviceWidth,
-    height: deviceHeight/1.139,
-  },
-})
