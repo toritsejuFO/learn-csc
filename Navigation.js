@@ -1,9 +1,11 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { Root } from 'native-base';
 
 import SideBar from './src/screens/SideBarScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import QuizListScreen from './src/screens/QuizListScreen';
+import QuizScreen from './src/screens/QuizScreen';
 import UserScreen from './src/screens/UserScreen';
 import ActivityScreen from './src/screens/ActivityScreen';
 
@@ -15,7 +17,7 @@ const Drawer = createDrawerNavigator(
     Activity: { screen: ActivityScreen },
   },
   {
-    initialRouteName: 'Activity',
+    initialRouteName: 'Home',
     overlayColor: 'rgba(0, 0, 0, 0.7)',
     contentComponent: (props) => <SideBar {...props}/>
   }
@@ -24,6 +26,7 @@ const Drawer = createDrawerNavigator(
 const AppNavigator = createStackNavigator(
   {
     Drawer: { screen: Drawer },
+    Quiz: { screen: QuizScreen },
   },
   {
     initialRouteName: 'Drawer',
@@ -33,4 +36,7 @@ const AppNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(AppNavigator)
 
-export default AppContainer;
+export default () => 
+  <Root>
+    <AppContainer/>
+  </Root>
