@@ -60,4 +60,5 @@ buck-out/
 /ios/Pods/
 
 # dirs
-assets/images
+assets/images/
+assets/animations/
