@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
   ImageBackground,
   View,
+  Alert,
 } from 'react-native';
 import {
   Container,
-  Content,
   Button,
   Form,
   Item,
@@ -43,7 +43,8 @@ export default class UserScreen extends Component {
   }
 
   handleUsernameChange = () => {
-    AsyncStorage.setItem('@learncsc:username', this.state.username)
+    AsyncStorage.setItem('@learncsc:username', this.state.username);
+    Alert.alert(`Username save as ${this.state.username}`);
   }
 
   render() {
@@ -52,35 +53,32 @@ export default class UserScreen extends Component {
     return (
       <Container>
         <MyHeader iconName='menu' title='Profile' username={username} {...this.props} />
-
-        <Content style={{ display: 'flex' }}>
-          <ImageBackground
-            source={homeBackgroundImage}
-            style={importedStyles.backgroundImage}
-            resizeMode='cover'
-          >
-          <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 20, justifyContent: 'space-evenly' }}>
-            <Form>
-              <Item fixedLabel style={{marginBottom: 30}} last>
-                <Label style={{ color:colors.gray, fontSize: 20 }}>Username</Label>
-                <Input
-                  style={{color: colors.gray, fontSize: 20}}
-                  value={username}
-                  onChangeText={username => this.setState({username})}
-                />
-              </Item>
-              <Button
-                dark
-                backgroundColor={colors.themeColor}
-                large
-                onPress={() => this.handleUsernameChange()}
-              >
-                <Text style={{ flex: 1, color: colors.gray, fontSize: 20, textAlign: 'center', fontWeight: 'bold' }}>Save</Text>
-              </Button>
-            </Form>
-          </View>
-          </ImageBackground>
-        </Content>
+        <ImageBackground
+          source={homeBackgroundImage}
+          style={importedStyles.backgroundImage}
+          resizeMode='cover'
+        >
+        <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.8)', padding: 20, justifyContent: 'space-evenly' }}>
+          <Form>
+            <Item fixedLabel style={{marginBottom: 30}} last>
+              <Label style={{ color:colors.gray, fontSize: 20 }}>Username</Label>
+              <Input
+                style={{color: colors.gray, fontSize: 20}}
+                value={username}
+                onChangeText={username => this.setState({username})}
+              />
+            </Item>
+            <Button
+              dark
+              backgroundColor={colors.themeColor}
+              large
+              onPress={() => this.handleUsernameChange()}
+            >
+              <Text style={{ flex: 1, color: colors.gray, fontSize: 20, textAlign: 'center', fontWeight: 'bold' }}>Save</Text>
+            </Button>
+          </Form>
+        </View>
+        </ImageBackground>
       </Container>
     );
   }
