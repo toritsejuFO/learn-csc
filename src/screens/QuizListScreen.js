@@ -6,11 +6,9 @@ import {
 } from 'react-native';
 import {
   Container,
-  Content,
   Text,
   Button,
   List,
-  ListItem,
 } from 'native-base';
 
 import MyHeader from '../components/MyHeader';
@@ -23,6 +21,7 @@ import Quiz from '../../assets/js/Quiz';
 export default class QuizListScreen extends Component {
   render () {
     const username = this.props.navigation.getParam('username');
+    const { navigate } = this.props.navigation;
 
     return (
       <Container>
@@ -33,15 +32,30 @@ export default class QuizListScreen extends Component {
           resizeMode='cover'
         >
           <List
-            style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 20}}
+            contentContainerStyle={{ paddingBottom: 30}} // hack to style last item
+            style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 30 }}
             dataArray={Quiz.topics}
-            keyExtractor={(topic) => topic}
+            keyExtractor={(topic) => topic.name}
             renderRow={(topic) => (
-              <ListItem noBorder>
-                <Button backgroundColor={colors.themeColor} large block>
-                  <Text style={styles.text}>{topic}</Text>
+              <ImageBackground
+                source={topic.imagePath}
+                style={styles.image}
+                imageStyle={{ borderRadius: 10 }}
+                resizeMode='cover'
+              >
+                <Button
+                  style={styles.button}
+                  onPress={() => navigate('Quiz', {
+                    username: username,
+                    topic: JSON.stringify({
+                      shortname: topic.shortname,
+                      questions: topic.questions,
+                    })
+                  })}
+                >
+                  <Text style={styles.text}>{topic.name}</Text>
                 </Button>
-              </ListItem>
+              </ImageBackground>
             )}
           />
         </ImageBackground>
@@ -51,10 +65,22 @@ export default class QuizListScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  image: {
+    height: 120,
+    marginBottom: 30,
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    borderRadius: 10,
+    elevation: 0,
+  },
   text: {
-    fontWeight: '400',
+    fontWeight: 'bold',
     fontSize: 18,
     color: colors.gray,
-    marginLeft: 20,
+    textTransform: 'uppercase',
   },
 })
