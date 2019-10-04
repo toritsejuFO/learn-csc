@@ -7,6 +7,11 @@ export default StyleSheet.create({
   backgroundImage: {
     flex: 1,
     width: deviceWidth,
-    height: deviceHeight/1.137,
+    height: deviceHeight,
+  },
+  HomeBackgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
   },
 });
