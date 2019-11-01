@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  ToastAndroid,
 } from 'react-native';
 import {
   Container,
@@ -57,7 +58,14 @@ export default class SideBar extends Component {
             <ListItem
               button
               noBorder
-              onPress={() => this.props.navigation.navigate('Activity', {screen: item.screen})}
+              onPress={() => {
+                if (item.name == 'Create') {
+                  ToastAndroid.show('Unavailable', ToastAndroid.BOTTOM)
+                }
+                else {
+                  this.props.navigation.navigate('Activity', {screen: item.screen})
+                }
+              }}
             >
               <Left>
                 <Icon
