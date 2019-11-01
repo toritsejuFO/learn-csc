@@ -34,7 +34,7 @@ export default class QuizScreen extends Component {
   render () {
     const username = this.props.navigation.getParam('username');
     const topic = JSON.parse(this.props.navigation.getParam('topic'));
-    const alpha = ['A', 'B', 'C', 'D'];
+    const options = ['A', 'B', 'C', 'D'];
 
     return (
       <Container>
@@ -42,33 +42,27 @@ export default class QuizScreen extends Component {
         <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}}>
           {topic.questions.map((question, i) => 
             <Tab heading={'Q'+question.number} key={question.number} tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle}>
-              <ImageBackground
-                source={HomeBackgroundImage}
-                style={importedStyles.HomeBackgroundImage}
-                resizeMode='cover'
-              >
-                <View style={{flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 20}}>
-                  <Card style={styles.card}>
-                    <CardItem header bordered style={styles.cardItem}>
-                      <H3 style={styles.questionText}>Question {question.number}</H3>
-                    </CardItem>
+              <View style={{flex: 1, backgroundColor: colors.themeColorWhite, padding: 20}}>
+                <Card style={styles.card}>
+                  <CardItem header bordered style={styles.cardItem}>
+                    <H3 style={styles.questionText}>Question {question.number}</H3>
+                  </CardItem>
 
-                    <CardItem bordered style={styles.cardItem}>
-                      <Body>
-                        <Text style={styles.questionText}>{question.question}</Text>
-                      </Body>
-                    </CardItem>
-                  </Card>
-                  <ScrollView contentContainerStyle={{justifyContent: 'space-evenly'}}>
-                    {question.options.map((option, i) => 
-                      <Button key={i} style={styles.answerButton} block>
-                        <Text style={{}}>{alpha[i]}.</Text>
-                        <Text style={styles.answerText}>{option}</Text>
-                      </Button>
-                    )}
-                  </ScrollView>
-                </View>
-              </ImageBackground>
+                  <CardItem style={styles.cardItem}>
+                    <Body>
+                      <Text style={styles.questionText}>{question.question}</Text>
+                    </Body>
+                  </CardItem>
+                </Card>
+                <ScrollView contentContainerStyle={{justifyContent: 'space-evenly'}}>
+                  {question.options.map((option, i) => 
+                    <Button key={i} style={styles.answerButton} block>
+                      <Text style={{}}>{options[i]}.</Text>
+                      <Text style={styles.answerText}>{option}</Text>
+                    </Button>
+                  )}
+                </ScrollView>
+              </View>
             </Tab>
           )}
         </Tabs>
@@ -79,30 +73,32 @@ export default class QuizScreen extends Component {
 
 const styles = StyleSheet.create({
   tabStyle: {
-    // backgroundColor: '#fff',
+    backgroundColor: colors.themeColorDark,
   },
   activeTabStyle: {
     backgroundColor: colors.themeColorDark,
   },
 
   card: {
-    marginBottom: 30,
+    marginBottom: 35,
   },
   cardItem: {
-    backgroundColor: colors.themeColor,
+    backgroundColor: 'white',
   },
   questionText: {
-    color: colors.gray,
+    // color: colors.gray,
+    color: colors.themeColorDark,
   },
 
   answerButton: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     height: 'auto',
-    marginBottom: 30,
-    paddingTop: 10,
+    marginBottom: 10,
+    paddingTop: 15,
     paddingBottom: 10,
-    // backgroundColor: '#fff',
+    borderRadius: 10,
+    backgroundColor: colors.themeColorDark,
   },
   answerText: {
     textTransform: 'lowercase',

@@ -26,14 +26,10 @@ export default class QuizListScreen extends Component {
     return (
       <Container>
         <MyHeader iconName='menu' title='Quizzes' username={username} {...this.props} />
-        <ImageBackground
-          source={HomeBackgroundImage}
-          style={importedStyles.backgroundImage}
-          resizeMode='cover'
-        >
+        <View style={{flex: 1, backgroundColor: colors.themeColorWhite}}>
           <List
             contentContainerStyle={{ paddingBottom: 30}} // hack to style last item
-            style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.7)', padding: 30 }}
+            style={{ flex: 1, backgroundColor: colors.themeColorWhite, padding: 30 }}
             dataArray={Quiz.topics}
             keyExtractor={(topic) => topic.name}
             renderRow={(topic) => (
@@ -58,7 +54,7 @@ export default class QuizListScreen extends Component {
               </ImageBackground>
             )}
           />
-        </ImageBackground>
+        </View>
       </Container>
     )
   }
@@ -73,9 +69,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     borderRadius: 10,
-    elevation: 0,
   },
   text: {
     fontWeight: 'bold',
