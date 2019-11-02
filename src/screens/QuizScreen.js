@@ -40,6 +40,7 @@ export default class QuizScreen extends Component {
       modalVisible: false,
       success: false,
       activeTab: 0,
+      initialPage: 0,
     }
   }
 
@@ -47,22 +48,28 @@ export default class QuizScreen extends Component {
     // Check for locked questions
     const questionLock = await AsyncStorage.getItem('@learncsc:questionLock');
     this.setState({questionLock: JSON.parse(questionLock)})
-    // console.warn(this.state.questionLock);
-    // console.warn(this.state.questionLock['ML'].length);
   }
 
   handleAnswerQuestion = (questionIndex, optionIndex) => {
-    if (optionIndex == this.state.topic.questions[questionIndex].answer) {
-      this.setState({success: true, modalVisible: true}) // Correct
+    const {activeTab, questionLock, topic} = this.state;
+    const nextTab = activeTab + 1;
+
+    if (optionIndex == topic.questions[questionIndex].answer) { // Correct
+      // Unlock next question if locked
+      if (questionLock[topic.shortname][nextTab] == 0) {
+        questionLock[topic.shortname][nextTab] = 1;
+      }
+      AsyncStorage.setItem('@learncsc:questionLock', JSON.stringify(questionLock));
+      this.setState({questionLock , success: true, modalVisible: true, initialPage: nextTab})
     }
-    else {
-      this.setState({success: false, modalVisible: true,}) // Wrong
+    else { // Wrong
+      this.setState({success: false, modalVisible: true,})
     }
   }
 
   handleCorrectlyAnswered = () => {
-    const activeTab = this.state.activeTab + 1;
-    this.setState({activeTab, modalVisible: false})
+    const {activeTab} = this.state;
+    this.setState({activeTab: activeTab + 1, modalVisible: false})
   }
 
   handleWronglyAnswered = () => {
@@ -108,7 +115,7 @@ export default class QuizScreen extends Component {
           </View>
         </Modal>
 
-        <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}} initialPage={0} page={activeTab}>
+        <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}} initialPage={activeTab} page={activeTab}>
           {topic.questions.map((question, questionIndex) => 
             <Tab 
               heading={'Q'+question.number}
