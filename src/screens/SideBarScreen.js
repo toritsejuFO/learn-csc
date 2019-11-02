@@ -33,6 +33,13 @@ const items = [
     type: 'FontAwesome',
   },
   {
+    name: 'Trivia',
+    screen: 'Trivia',
+    icon: 'question',
+    type: 'FontAwesome',
+    right: 'lock'
+  },
+  {
     name: 'Create',
     screen: 'Create',
     icon: 'plus',
@@ -59,7 +66,7 @@ export default class SideBar extends Component {
               button
               noBorder
               onPress={() => {
-                if (item.name == 'Create') {
+                if (item.name == 'Create' || item.name == 'Trivia') {
                   ToastAndroid.show('Unavailable', ToastAndroid.BOTTOM)
                 }
                 else {
