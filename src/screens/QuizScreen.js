@@ -41,6 +41,7 @@ export default class QuizScreen extends Component {
       success: false,
       activeTab: 0,
       initialPage: 0,
+      completed: false,
     }
   }
 
@@ -59,8 +60,18 @@ export default class QuizScreen extends Component {
       if (questionLock[topic.shortname][nextTab] == 0) {
         questionLock[topic.shortname][nextTab] = 1;
       }
+
+      // Check if last question was just answered
+      if (questionLock[topic.shortname].length == questionIndex + 1 ) {
+        this.setState({completed: true})
+      }
       AsyncStorage.setItem('@learncsc:questionLock', JSON.stringify(questionLock));
-      this.setState({questionLock , success: true, modalVisible: true, initialPage: nextTab})
+      this.setState({
+        questionLock,
+        success: true,
+        modalVisible: true,
+        initialPage: nextTab,
+      })
     }
     else { // Wrong
       this.setState({success: false, modalVisible: true,})
@@ -79,7 +90,7 @@ export default class QuizScreen extends Component {
   render () {
     const username = this.props.navigation.getParam('username');
     const options = ['A', 'B', 'C', 'D'];
-    const {topic, questionLock, success, activeTab, modalVisible} = this.state;
+    const {topic, questionLock, success, activeTab, modalVisible, completed} = this.state;
     const thisQuestionLock = questionLock[topic.shortname]; // Get current particular quiz topic
 
     return (
@@ -94,7 +105,9 @@ export default class QuizScreen extends Component {
             { success
               ? <>
                   <LottieView  source={correct} autoPlay loop/>
-                  <Text style={{color: 'white', marginBottom: 60, fontSize: 24}}>Next question Unlocked</Text>
+                  <Text style={{color: 'white', marginBottom: 60, fontSize: 24, padding: 10}}>
+                    {completed ? 'Congratulations, You\'re now a ' + topic.shortname + ' expert' : 'Next Question Unlocked'}
+                  </Text>
                   <Button
                     large
                     style={{marginTop: 300}}
@@ -115,7 +128,11 @@ export default class QuizScreen extends Component {
           </View>
         </Modal>
 
-        <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}} initialPage={activeTab} page={activeTab}>
+        <Tabs
+          renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}}
+          initialPage={activeTab}
+          page={activeTab}
+          onChangeTab={({i}) => this.setState({initialPage: i, activeTab: i})}>
           {topic.questions.map((question, questionIndex) => 
             <Tab 
               heading={'Q'+question.number}
