@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  ImageBackground,
+  Image,
   View,
   ScrollView,
   Alert,
+  Modal,
 } from 'react-native';
 import {
   Container,
@@ -16,59 +17,152 @@ import {
   CardItem,
   Body,
   Button,
-  Left,
   H3,
-  Row,
+  Icon,
 } from 'native-base';
+import AsyncStorage from '@react-native-community/async-storage';
+import LottieView from 'lottie-react-native';
 
 import MyHeader from '../components/MyHeader';
-import importedStyles from '../styles';
 import colors from '../colors';
 
-const HomeBackgroundImage = require('../../assets/images/pq_dark.jpeg');
+const correct = require('../../assets/animations/correct.json');
+const wrong = require('../../assets/animations/wrong.json');
 
 export default class QuizScreen extends Component {
-  componentDidMount = () => {
-    // Alert.alert('hi');
+  constructor (props) {
+    super(props)
+    const topic = JSON.parse(props.navigation.getParam('topic'))
+    
+    this.state = {
+      questionLock: {},
+      topic: topic,
+      modalVisible: false,
+      success: false,
+      activeTab: 0,
+    }
   }
+
+  componentDidMount = async () => {
+    // Check for locked questions
+    const questionLock = await AsyncStorage.getItem('@learncsc:questionLock');
+    this.setState({questionLock: JSON.parse(questionLock)})
+    // console.warn(this.state.questionLock);
+    // console.warn(this.state.questionLock['ML'].length);
+  }
+
+  handleAnswerQuestion = (questionIndex, optionIndex) => {
+    if (optionIndex == this.state.topic.questions[questionIndex].answer) {
+      this.setState({success: true, modalVisible: true}) // Correct
+    }
+    else {
+      this.setState({success: false, modalVisible: true,}) // Wrong
+    }
+  }
+
+  handleCorrectlyAnswered = () => {
+    const activeTab = this.state.activeTab + 1;
+    this.setState({activeTab, modalVisible: false})
+  }
+
+  handleWronglyAnswered = () => {
+    this.setState({modalVisible: false})
+  }
+
   render () {
     const username = this.props.navigation.getParam('username');
-    const topic = JSON.parse(this.props.navigation.getParam('topic'));
     const options = ['A', 'B', 'C', 'D'];
+    const {topic, questionLock, success, activeTab, modalVisible} = this.state;
+    const thisQuestionLock = questionLock[topic.shortname]; // Get current particular quiz topic
 
     return (
       <Container>
         <MyHeader iconName='arrow-back' username={username} title={topic.shortname} goBack={true} {...this.props} />
-        <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}}>
-          {topic.questions.map((question, i) => 
-            <Tab heading={'Q'+question.number} key={question.number} tabStyle={styles.tabStyle} activeTabStyle={styles.activeTabStyle}>
-              <View style={{flex: 1, backgroundColor: colors.themeColorWhite, padding: 20}}>
-                <Card style={styles.card}>
-                  <CardItem header bordered style={styles.cardItem}>
-                    <H3 style={styles.questionText}>Question {question.number}</H3>
-                  </CardItem>
 
-                  <CardItem style={styles.cardItem}>
-                    <Body>
-                      <Text style={styles.questionText}>{question.question}</Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-                <ScrollView contentContainerStyle={{justifyContent: 'space-evenly'}}>
-                  {question.options.map((option, i) => 
-                    <Button key={i} style={styles.answerButton} block>
-                      <Text style={{}}>{options[i]}.</Text>
-                      <Text style={styles.answerText}>{option}</Text>
-                    </Button>
-                  )}
-                </ScrollView>
-              </View>
+        <Modal
+          animationType='fade'
+          transparent={true}
+          visible={modalVisible}>
+          <View style={styles.modalView}>
+            { success
+              ? <>
+                  <LottieView  source={correct} autoPlay loop/>
+                  <Text style={{color: 'white', marginBottom: 60, fontSize: 24}}>Next question Unlocked</Text>
+                  <Button
+                    large
+                    style={{marginTop: 300}}
+                    onPress={() => this.handleCorrectlyAnswered()}>
+                    <Text>Next</Text>
+                  </Button>
+                </>
+              : <>
+                  <LottieView  source={wrong} autoPlay loop/>
+                  <Button
+                    large
+                    style={{marginTop: 250}}
+                    onPress={() => this.handleWronglyAnswered()}>
+                    <Text>Try Again</Text>
+                  </Button>
+                </>
+            }
+          </View>
+        </Modal>
+
+        <Tabs renderTabBar={() => <ScrollableTab/>} last={{marginBottom: 30}} initialPage={0} page={activeTab}>
+          {topic.questions.map((question, questionIndex) => 
+            <Tab 
+              heading={'Q'+question.number}
+              key={question.number}
+              tabStyle={styles.tabStyle}
+              activeTabStyle={styles.activeTabStyle}>
+              {
+                // Ensure questions index does not exceed actual question length before rendering appropraite view
+                (thisQuestionLock && (questionIndex < thisQuestionLock.length) && thisQuestionLock[questionIndex] == 0)
+                ? <LockedView/>
+                : <View style={{flex: 1, backgroundColor: colors.themeColorWhite, padding: 20}}>
+                    <Card style={styles.card}>
+                      <CardItem header bordered style={styles.cardItem}>
+                        <H3 style={styles.questionText}>Question {question.number}</H3>
+                      </CardItem>
+
+                      <CardItem style={styles.cardItem}>
+                        <Body>
+                          <Text style={styles.questionText}>{question.question}</Text>
+                        </Body>
+                      </CardItem>
+                    </Card>
+
+                    <ScrollView contentContainerStyle={{justifyContent: 'space-evenly'}}>
+                      {question.options.map((option, optionIndex) => 
+                        <Button 
+                          block
+                          key={optionIndex}
+                          style={styles.answerButton}
+                          onPress={() => this.handleAnswerQuestion(questionIndex, optionIndex)}>
+                          <Text>{options[optionIndex]}.</Text>
+                          <Text style={styles.answerText}>{option}</Text>
+                        </Button>
+                      )}
+                    </ScrollView>
+                  </View>
+              }
             </Tab>
           )}
         </Tabs>
       </Container>
     )
   }
+}
+
+const LockedView = () => {
+  return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.themeColorWhite}}>
+    <Icon
+      active
+      name='lock'
+      type='FontAwesome'
+      style={styles.locked}
+    />
+  </View>
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +180,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   questionText: {
-    // color: colors.gray,
     color: colors.themeColorDark,
   },
 
@@ -107,5 +200,19 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,
     marginRight: 60,
-  }
+  },
+  locked: {
+    color: 'red',
+    fontSize: 100,
+  },
+  modalView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  modalText: {
+    color: colors.themeColorDark,
+    marginTop: 50,
+  },
 })
