@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   View,
+  Alert
 } from 'react-native';
 import {
   Container,
@@ -11,13 +12,38 @@ import {
   Icon,
   Text,
 } from 'native-base';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import MyHeader from '../components/MyHeader';
 import colors from '../colors';
+import Quiz from '../../assets/js/Quiz';
 
 const homeBackgroundImage = require('../../assets/images/pq_text_light.jpeg');
 
 export default class HomeScreen extends Component {
+  componentDidMount = async () => {
+    // Lock questions once app is launched for the first time
+    const questionLock = await AsyncStorage.getItem('@learncsc:questionLock') || null;
+    // const questionLock = null;
+
+    if (!questionLock) {
+      Alert.alert('Questions are not locked');
+      const questions = {};
+
+      // Lock questions in each topic
+      Quiz.topics.forEach(topic => {
+        questions[topic.shortname] = [];
+        topic.questions.forEach((question, i) => {
+          i == 0 ? questions[topic.shortname].push(1) // Leave first question open
+          : questions[topic.shortname].push(0); // Lock subsequent questions
+        })
+      });
+      // console.warn(JSON.stringify(questions, null, 2));
+      AsyncStorage.setItem('@learncsc:questionLock', JSON.stringify(questions));
+    }
+    // AsyncStorage.removeItem('@learncsc:questionLock');
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 
