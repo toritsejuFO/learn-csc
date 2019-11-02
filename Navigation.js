@@ -1,5 +1,6 @@
 import React from 'react';
-import { createAppContainer, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Root } from 'native-base';
 
 import SideBar from './src/screens/SideBarScreen';
