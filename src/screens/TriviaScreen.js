@@ -55,6 +55,11 @@ export default class TriviaScreen extends Component {
     }
   }
 
+  handleWronglyAnswered = () => {
+    this.fetchQuestion();
+    this.setState({modalVisible: false})
+  }
+
   shuffle = (array) => {
     for(let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1))
@@ -122,7 +127,7 @@ export default class TriviaScreen extends Component {
   render () {
     const username = this.props.navigation.getParam('username');
     const tags = ['A', 'B', 'C', 'D'];
-    const {fetching, failedToLoad, error, difficulty, question, options, color, success, modalVisible} = this.state;
+    const {fetching, failedToLoad, error, difficulty, question, options, answer, color, success, modalVisible} = this.state;
 
     return (
       <Container>
@@ -148,11 +153,14 @@ export default class TriviaScreen extends Component {
                 </>
               : <>
                   <LottieView  source={wrong} autoPlay loop/>
+                  <Text style={{color: 'white', marginBottom: 60, fontSize: 24, padding: 10}}>
+                    Correct Answer is {answer}
+                  </Text>
                   <Button
                     large
                     style={{marginTop: 250}}
-                    onPress={() => this.setState({modalVisible: false})}>
-                    <Text>Failed</Text>
+                    onPress={() => this.handleWronglyAnswered()}>
+                    <Text>Next</Text>
                   </Button>
                 </>
             }
