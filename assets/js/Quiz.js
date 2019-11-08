@@ -20,7 +20,7 @@ const questions = {
         'Examining internet of things (IoT) data to predict equipment issues before they arise',
         'Analyzing previous product revenue data to determine the cause of dropping sales',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '3',
@@ -31,7 +31,7 @@ const questions = {
         'Identifying relationships between events to predict when one will follow the other',
         'All of the above are common machine learning techniques',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '4',
@@ -42,7 +42,7 @@ const questions = {
         'Reinforcement Learning',
         'Unsupervised Learning',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '5',
@@ -51,7 +51,7 @@ const questions = {
         'True',
         'False',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '6',
@@ -73,7 +73,7 @@ const questions = {
         'You can have either answer one or two',
         'You don\'t need to have a network adapter',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '2',
@@ -84,7 +84,7 @@ const questions = {
         'It is a general alphabetical label, which most computers share',
         'It is a unique alphabetical label, which is different for each device',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '3',
@@ -95,7 +95,7 @@ const questions = {
         'DNS',
         'TCP/IP',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '4',
@@ -117,7 +117,7 @@ const questions = {
         'It generates IPv4 codes',
         'It generates IPv6 codes'
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '6',
@@ -128,7 +128,7 @@ const questions = {
         'Around 64 Kb/s',
         'More than 1 Gb/s',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '7',
@@ -139,18 +139,18 @@ const questions = {
         'Duplicates the electrical signal of each frame to every port',
         'Determines which interface is used to forward a frame based on the destination MAC address',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '8',
-      question: 'How is a frame sent from PCA forwarded to PCCC if the MAC address table on switch SW1 is empty?',
+      question: 'How is a frame sent from PCA forwarded to PCC if the MAC address table on switch SW1 is empty?',
       options: [
         'SW1 forwards the frame directly to SW2. SW2 floods the frame to all ports connected to SW2, excluding the port through which the frame entered the switch',
         'SW1 floods the frame on all ports on the switch, excluding the interconnected port to switch SW2 and the port through which the frame entered the switch',
         'SW1 floods the frame on all ports on SW1, excluding the port through which the frame entered the switch',
         'SW1 drops the frame because it does not know the destination MAC address',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '9',
@@ -172,7 +172,7 @@ const questions = {
         'The memory space that is allocated to each switch port',
         'The number of available ports',
       ],
-      answer: 0,
+      answer: 3,
     },
   ],
   webdev: [
@@ -185,7 +185,7 @@ const questions = {
         '<!doctype html5>',
         '<!doctype html>',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '2',
@@ -196,7 +196,7 @@ const questions = {
         '.XML',
         '.XHTML',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '3',
@@ -207,7 +207,7 @@ const questions = {
         '<a href="http://www.w3schools.com">W3Schools</a>',
         '<a>http://www.w3schools.com</a>',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '4',
@@ -218,7 +218,7 @@ const questions = {
         '<thead><body><tr>',
         '<table><tr><tt>',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '5',
@@ -229,7 +229,7 @@ const questions = {
         '<image src="image.gif" alt="MyImage">',
         '<img href="image.gif" alt="MyImage">',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '6',
@@ -240,7 +240,7 @@ const questions = {
         '<link rel="stylesheet" type="text/css" href="mystyle.css">',
         '<link rel="style" type="text/css" src="mystyle.css">'
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '7',
@@ -262,7 +262,7 @@ const questions = {
         'bgcolor',
         'backgroundColor'
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '9',
@@ -283,7 +283,7 @@ const questions = {
         '$("p").layout("background-color","red");',
         '$("p").style("background-color","red");',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '11',
@@ -294,7 +294,7 @@ const questions = {
         'The first div element with class="intro"',
         'All div elements with class="intro"',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '12',
@@ -305,7 +305,7 @@ const questions = {
         'hide()',
         'display(none)',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '13',
@@ -316,7 +316,7 @@ const questions = {
         'Provides easy access to required data, night and day on demand.',
         'Allows us to serve Web Pages',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '14',
@@ -327,7 +327,7 @@ const questions = {
         'Allows us to split our web page in two, one for the client and one for the server',
         'It\'s HTML code on the client',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '15',
@@ -338,7 +338,7 @@ const questions = {
         'JavaScript',
         'Internet Explorer',
       ],
-      answer: 0,
+      answer: 2,
     },
   ],
   cloud: [
@@ -351,7 +351,7 @@ const questions = {
         'Virtualization',
         'Public cloud',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '2',
@@ -362,7 +362,7 @@ const questions = {
         'Software-as-a-Service (SaaS)',
         'Cloud service',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '3',
@@ -371,7 +371,7 @@ const questions = {
         'True',
         'False',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '4',
@@ -384,6 +384,61 @@ const questions = {
       ],
       answer: 0,
     },
+    {
+      number: '5',
+      question: '_______ provides virtual machines, virtual storage, virtual infrastructure, and other hardware assets.',
+      options: [
+        'SaaS',
+        'Service Provider',
+        'Paas',
+        'IaaS',
+      ],
+      answer: 3,
+    },
+    {
+      number: '6',
+      question: 'What is the disadvantage of cloud computing?',
+      options: [
+        'It does not support group collaboration.',
+        'It requires constant internet connection.',
+        'It provides limited storage.',
+        'None of these.',
+      ],
+      answer: 1,
+    },
+    {
+      number: '7',
+      question: 'Which cloud infrastructure is composed of some combination of cloud services from different service providers?',
+      options: [
+        'public cloud',
+        'private cloud',
+        'hybrid cloud',
+        'distributed cloud',
+      ],
+      answer: 2,
+    },
+    {
+      number: '8',
+      question: 'Which delivery model is an example of a cloud computing environment that provides users with a web based email service?',
+      options: [
+        'PaaS',
+        'Saas',
+        'IaaS',
+        'Email as a Service',
+      ],
+      answer: 1,
+    },
+    {
+      number: '9',
+      question: 'Which billing model allows companies to have a predetermined and recurring costs for services used in a cloud environment?',
+      options: [
+        'utility',
+        'metered',
+        'resource based',
+        'subscription',
+      ],
+      answer: 3,
+    },
   ],
   mobile: [
     {
@@ -395,7 +450,188 @@ const questions = {
         'iOS',
         'HarmonyOS',
       ],
+      answer: 1,
+    },
+    {
+      number: '2',
+      question: 'Play Store is available in which operating system',
+      options: [
+        'Android',
+        'Unix',
+        'iOS',
+        'HarmonyOS',
+      ],
       answer: 0,
+    },
+    {
+      number: '3',
+      question: 'Native Mobile Applications run directly from your smartphone or tablet. These are mobile OS/platform-based applications',
+      options: [
+        'true',
+        'false',
+      ],
+      answer: 0,
+    },
+    {
+      number: '4',
+      question: 'Which operating system is the Android OS based off of?',
+      options: [
+        'MAC OSX',
+        'Unix',
+        'Windows NT Kernel',
+        'Linux',
+      ],
+      answer: 3,
+    },
+    {
+      number: '5',
+      question: 'What does SDK stand for?',
+      options: [
+        'Software Design Kit',
+        'Specific Developed Keys',
+        'Software Development Kit',
+        'Stand-alone Desk Kit',
+      ],
+      answer: 2,
+    },
+    {
+      number: '6',
+      question: 'Which of these Virtual Assistants is designed for Android',
+      options: [
+        'Google',
+        'Siri',
+        'Cortana',
+        'Yahoo',
+      ],
+      answer: 0,
+    },
+    {
+      number: '7',
+      question: 'Which of the following controls the orientation of your phone?',
+      options: [
+        'Gyroscope',
+        'Geotracking',
+        'Accelerometer',
+        'Capacitive',
+      ],
+      answer: 2,
+    },
+    {
+      number: '8',
+      question: 'Which operating system is iOS based off of?',
+      options: [
+        'Linux',
+        'Mac OSX',
+        'Windows NT Kernel',
+        'Unix',
+      ],
+      answer: 3,
+    },
+    {
+      number: '9',
+      question: 'What is an advantage of Action Launcher?',
+      options: [
+        'Increases the bandwidth of your apps',
+        'Allows quicker access to applications',
+        'Manages Application',
+        'Calibrates your screen',
+      ],
+      answer: 1,
+    },
+    {
+      number: '10',
+      question: 'Which of these mobile operating system are open source?',
+      options: [
+        'Windows Mobile',
+        'Linux',
+        'Android',
+        'Apple iOS',
+      ],
+      answer: 2,
+    },
+    {
+      number: '11',
+      question: 'What technology makes WiFi calling possible?',
+      options: [
+        'VOIP',
+        'Wifi',
+        'WiMax',
+        'WWAN',
+      ],
+      answer: 0,
+    },
+    {
+      number: '12',
+      question: 'What format is an Android Application gonna be created as?',
+      options: [
+        'SDK',
+        'APK',
+        'xCode',
+        'Android Studio',
+      ],
+      answer: 1,
+    },
+    {
+      number: '13',
+      question: 'Which touchscreens need to be constantly calibrated?',
+      options: [
+        'Resistive Touchscreen',
+        'Capacitive Touchscreen',
+        'New Touchscreens',
+        'Gyroscope Screens',
+      ],
+      answer: 0,
+    },
+    {
+      number: '14',
+      question: 'Which operating system are iOS applications designed in?',
+      options: [
+        'Windows 8.1/10',
+        'Unix',
+        'MAC OSX',
+        'Linux',
+      ],
+      answer: 2,
+    },
+    {
+      number: '15',
+      question: 'Which type of screen relies on the electrical properties of the human body to detect where a display was tapped?',
+      options: [
+        'Resistive Touchscreen',
+        'Capacitive Touchscreen',
+        'SAW',
+        'Infrared',
+      ],
+      answer: 1,
+    },
+    {
+      number: '16',
+      question: 'Which of the following is required to create Apple iOS apps?',
+      options: [
+        'SDK',
+        'Xcode',
+        'Google IDE',
+        'Apple Development',
+      ],
+      answer: 1,
+    },
+    {
+      number: '17',
+      question: 'WiFi calling is integrated into every mobile operating system',
+      options: [
+        'false',
+        'true',
+      ],
+      answer: 0,
+    },
+    {
+      number: '18',
+      question: 'Windows Mobile is open sourced',
+      options: [
+        'true',
+        'false',
+      ],
+      answer: 1,
     },
   ],
   design: [
@@ -408,7 +644,7 @@ const questions = {
         'Screen resolution',
         'Lpi',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '2',
@@ -419,7 +655,7 @@ const questions = {
         'Orange',
         'Yellow-orange',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '3',
@@ -430,18 +666,18 @@ const questions = {
         'Flash',
         'Illustrator',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '4',
-      question: 'The major difference between graphic designers and graphic artists is:',
+      question: 'The placement of graphics and text on a graphic design is known as _________.',
       options: [
-        'Graphic designers have ultimate creative control',
-        'Graphic artists create to serve the greater public',
-        'Graphic designers are advertisers',
-        'Graphic designers follow all client recommendations',
+        'Balanced',
+        'Framing',
+        'Asymmetrical',
+        'Simplicity',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '5',
@@ -452,7 +688,7 @@ const questions = {
         'Asymmetrical',
         'Simplicity',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '6',
@@ -463,7 +699,7 @@ const questions = {
         'Package designers always consider the 3 second rule',
         'Convenience and recognition are key considerations',
       ],
-      answer: 0,
+      answer: 2,
     },
     {
       number: '7',
@@ -474,7 +710,7 @@ const questions = {
         'Used by most digital photographers',
         'Only used in Flash and PhotoShop',
       ],
-      answer: 0,
+      answer: 1,
     },
     {
       number: '8',
@@ -485,29 +721,29 @@ const questions = {
         'Texture',
         'Unity',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '9',
-      question: 'Which of the following is not one of the compositional consideration of design that we discussed in class?',
+      question: 'Which of the following is not included in a style sheet?',
       options: [
-        'Rule of odds',
-        'Selective focus',
-        'Symmetrical balance',
-        'Space',
+        'Type face (font)',
+        'CMYK colors',
+        'RGB colors',
+        'None of the above',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '10',
       question: 'This artist was our inspiration for the Pop Art work we did as a triptych.',
       options: [
-        'Peter Maxx',
+        'Bierut',
         'Warhol',
         'Fairey',
-        'Bierut',
+        'Maxx',
       ],
-      answer: 0,
+      answer: 3,
     },
     {
       number: '11',
@@ -522,16 +758,37 @@ const questions = {
     },
     {
       number: '12',
-      question: 'One of the golden rules of graphic design is to keep the design asymmetrically balanced.  To do so, this is one of the best rules to help organize the design:',
+      question: 'One of the golden rules of graphic design is to keep the design asymmetrically balanced. To do so, this is one of the best rules to help organize the design:',
       options: [
         'Rule of opposition',
         'Rules of odds',
         'Rule of proximity',
         'Rule of selective focus',
       ],
-      answer: 0,
+      answer: 1,
     },
-
+    {
+      number: '13',
+      question: 'What is the primary function of a critique of your design?',
+      options: [
+        'To point out the flaws in the design.',
+        'To make the designer feel good about the design.',
+        'To improve the overall design.',
+        'To improve the designer.',
+      ],
+      answer: 2,
+    },
+    {
+      number: '14',
+      question: 'Which of the following formats should never be given to the client?',
+      options: [
+        '.png',
+        '.psd',
+        '.gif',
+        '.jpeg',
+      ],
+      answer: 1,
+    },
   ],
 }
 
