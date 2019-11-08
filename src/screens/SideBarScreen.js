@@ -39,7 +39,6 @@ const items = [
     screen: 'Trivia',
     icon: 'question',
     type: 'FontAwesome',
-    right: 'lock'
   },
   {
     name: 'User',
@@ -50,6 +49,7 @@ const items = [
     name: 'Lock All Questions',
     icon: 'lock',
     type: 'FontAwesome',
+    color: 'red'
   },
 ]
 
@@ -81,10 +81,7 @@ export default class SideBar extends Component {
               button
               noBorder
               onPress={() => {
-                if (item.name == 'Trivia') {
-                  ToastAndroid.show('Unavailable', ToastAndroid.BOTTOM);
-                }
-                else if (item.name == 'Lock All Questions') {
+                if (item.name == 'Lock All Questions') {
                   this.handleLockAllQuestions();
                   ToastAndroid.show('All questions have been Locked', ToastAndroid.BOTTOM);
                 }
@@ -98,7 +95,7 @@ export default class SideBar extends Component {
                   active
                   name={item.icon}
                   type={item.type && item.type}
-                  style={{fontSize: 28, width: 30, color: colors.gray}}
+                  style={{fontSize: 28, width: 30, color: item.color ? item.color : colors.gray}}
                 />
                 <Text style={styles.text}>{item.name}</Text>
               </Left>

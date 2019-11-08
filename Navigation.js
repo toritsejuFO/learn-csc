@@ -7,6 +7,7 @@ import SideBar from './src/screens/SideBarScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import QuizListScreen from './src/screens/QuizListScreen';
 import QuizScreen from './src/screens/QuizScreen';
+import TriviaScreen from './src/screens/TriviaScreen';
 import UserScreen from './src/screens/UserScreen';
 import ActivityScreen from './src/screens/ActivityScreen';
 
@@ -14,6 +15,7 @@ const Drawer = createDrawerNavigator(
   {
     Home: { screen: HomeScreen },
     QuizList: { screen: QuizListScreen },
+    Trivia: { screen: TriviaScreen },
     User: { screen: UserScreen },
     Activity: { screen: ActivityScreen },
   },
