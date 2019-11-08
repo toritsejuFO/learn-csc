@@ -14,8 +14,10 @@ import {
   Icon,
   Text,
 } from 'native-base';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import colors from '../colors';
+import Quiz from '../../assets/js/Quiz';
 
 const drawerCover = require('../../assets/images/pq_text_light.jpeg')
 
@@ -40,20 +42,33 @@ const items = [
     right: 'lock'
   },
   {
-    name: 'Create',
-    screen: 'Create',
-    icon: 'plus',
-    type: 'FontAwesome',
-    right: 'lock'
-  },
-  {
     name: 'User',
     screen: 'User',
     icon: 'person',
   },
+  {
+    name: 'Lock All Questions',
+    icon: 'lock',
+    type: 'FontAwesome',
+  },
 ]
 
 export default class SideBar extends Component {
+  handleLockAllQuestions = () => {
+    const questions = {};
+
+    // Lock questions in each topic
+    Quiz.topics.forEach(topic => {
+      questions[topic.shortname] = [];
+      topic.questions.forEach((question, i) => {
+        i == 0 ? questions[topic.shortname].push(1) // Leave first question open
+        : questions[topic.shortname].push(0); // Lock subsequent questions
+      })
+    });
+    // console.warn(JSON.stringify(questions, null, 2));
+    AsyncStorage.setItem('@learncsc:questionLock', JSON.stringify(questions));
+  }
+
   render () {
     return (
       <Container style={{flex: 1, backgroundColor: colors.themeColorDark}}>
@@ -66,8 +81,12 @@ export default class SideBar extends Component {
               button
               noBorder
               onPress={() => {
-                if (item.name == 'Create' || item.name == 'Trivia') {
-                  ToastAndroid.show('Unavailable', ToastAndroid.BOTTOM)
+                if (item.name == 'Trivia') {
+                  ToastAndroid.show('Unavailable', ToastAndroid.BOTTOM);
+                }
+                else if (item.name == 'Lock All Questions') {
+                  this.handleLockAllQuestions();
+                  ToastAndroid.show('All questions have been Locked', ToastAndroid.BOTTOM);
                 }
                 else {
                   this.props.navigation.navigate('Activity', {screen: item.screen})

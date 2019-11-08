@@ -27,7 +27,7 @@ export default class HomeScreen extends Component {
     // const questionLock = null;
 
     if (!questionLock) {
-      Alert.alert('Questions are not locked');
+      // Alert.alert('Questions are not locked');
       const questions = {};
 
       // Lock questions in each topic
