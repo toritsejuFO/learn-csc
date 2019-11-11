@@ -62,3 +62,6 @@ buck-out/
 # dirs
 assets/images/
 assets/animations/
+
+# file
+keystore.properties
