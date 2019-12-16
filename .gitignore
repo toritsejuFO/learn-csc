@@ -59,9 +59,6 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# dirs
-assets/images/
-assets/animations/
 
 # file
 keystore.properties
