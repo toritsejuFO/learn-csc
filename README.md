@@ -1,5 +1,5 @@
 # learn-csc
-A hybrid mobile application to learn about Computer Science by taking quizzes. Built with React Native.
+A native mobile application to learn about Computer Science by taking quizzes. Built with React Native.
 
 ## About
 The application has an in-built (offline) number of questions on different aspects of computer science. This allows you to still enjoy the app offline without data. The set of in-built questions, except the first one (which is always open), requires you to answer the previous question correctly to be able to unlock the next. After you answer all questions correctly (Unlock all questions), you can lock it all up again so a friend can have a go at it themselves. Cool right?
